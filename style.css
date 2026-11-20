@@ -1,0 +1,1190 @@
+/* =========================================================
+   Bloom Into My World  |  style.css
+   Themes are controlled by CSS variables (see :root and
+   the [data-theme] blocks) and switched in script.js
+   ========================================================= */
+
+:root {
+  --bg1: #fff0f6;
+  --bg2: #ffe0ed;
+  --bg3: #fff8fb;
+  --text: #63384e;
+  --muted: #98516d;
+  --accent: #d94f85;
+  --title: #bd4778;
+  --heading: #a84670;
+  --btn: #ef77a3;
+  --btn-hover: #e25f92;
+  --petal-a: #ffb6d0;
+  --petal-b: #f77eac;
+  --petal-border: #e66f9d;
+  --petal-text: #873957;
+  --petal-visited-a: #ffe3ee;
+  --petal-visited-b: #ffa9c8;
+  --center: #ffd46f;
+  --center-border: #f2b64f;
+  --center-text: #a95b65;
+  --modal-bg: #fffafd;
+  --modal-border: #f48bb1;
+  --field-border: #e9a0bc;
+  --card: #fff0f6;
+  --shadow: rgba(217, 91, 133, 0.18);
+  --shadow-strong: rgba(201, 75, 123, 0.4);
+  --backdrop: rgba(73, 37, 55, 0.65);
+}
+
+:root[data-theme="lavender"] {
+  --bg1: #f5f0ff; --bg2: #e8dcff; --bg3: #faf7ff;
+  --text: #46385f; --muted: #6f5a94;
+  --accent: #7c4fd6; --title: #6a3fc0; --heading: #5b3aa3;
+  --btn: #9a72e6; --btn-hover: #8559d8;
+  --petal-a: #d9c6ff; --petal-b: #a98af0; --petal-border: #8d6bde; --petal-text: #3f2a74;
+  --petal-visited-a: #efe6ff; --petal-visited-b: #c3a9f7;
+  --center: #ffe08a; --center-border: #f0c04f; --center-text: #6a3fc0;
+  --modal-bg: #fcfaff; --modal-border: #a98af0; --field-border: #b9a1ec; --card: #f2ecff;
+  --shadow: rgba(124, 79, 214, 0.18); --shadow-strong: rgba(124, 79, 214, 0.4);
+  --backdrop: rgba(40, 28, 66, 0.65);
+}
+
+:root[data-theme="mint"] {
+  --bg1: #effcf6; --bg2: #d4f5e6; --bg3: #f8fffb;
+  --text: #2f4f45; --muted: #4f7a6b;
+  --accent: #1fa57a; --title: #158a65; --heading: #12795a;
+  --btn: #3dbb92; --btn-hover: #2ca680;
+  --petal-a: #b5ecd3; --petal-b: #6fd3ac; --petal-border: #42b78c; --petal-text: #1f5440;
+  --petal-visited-a: #e0f8ee; --petal-visited-b: #98e0c3;
+  --center: #ffd98a; --center-border: #f0b94f; --center-text: #158a65;
+  --modal-bg: #fafffc; --modal-border: #6fd3ac; --field-border: #8fd3b8; --card: #eafaf2;
+  --shadow: rgba(31, 165, 122, 0.18); --shadow-strong: rgba(31, 165, 122, 0.4);
+  --backdrop: rgba(20, 50, 40, 0.65);
+}
+
+:root[data-theme="sunset"] {
+  --bg1: #fff4ea; --bg2: #ffe0cc; --bg3: #fffaf5;
+  --text: #5c3a2e; --muted: #8f5a45;
+  --accent: #e8662f; --title: #cf5520; --heading: #b24a1d;
+  --btn: #f58a55; --btn-hover: #e87740;
+  --petal-a: #ffcfa8; --petal-b: #fb9a62; --petal-border: #e87d45; --petal-text: #7a3418;
+  --petal-visited-a: #ffeadb; --petal-visited-b: #ffbd90;
+  --center: #ffe27a; --center-border: #f2bf45; --center-text: #b24a1d;
+  --modal-bg: #fffbf7; --modal-border: #f5a073; --field-border: #efb08c; --card: #fff0e4;
+  --shadow: rgba(232, 102, 47, 0.18); --shadow-strong: rgba(232, 102, 47, 0.4);
+  --backdrop: rgba(70, 35, 20, 0.65);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  background: linear-gradient(145deg, var(--bg1), var(--bg2), var(--bg3));
+  background-attachment: fixed;
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ---------- Falling petals background ---------- */
+
+#petal-rain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.rain {
+  position: absolute;
+  top: -8vh;
+  left: var(--x);
+  font-size: var(--size);
+  opacity: 0.45;
+  animation: rain var(--dur) linear var(--delay) infinite;
+}
+
+@keyframes rain {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  50%  { transform: translate(var(--sway), 55vh) rotate(180deg); }
+  100% { transform: translate(0, 115vh) rotate(360deg); }
+}
+
+/* ---------- Page layout ---------- */
+
+.page {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 18px 14px 30px;
+  overflow: hidden;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.theme-dots {
+  display: flex;
+  gap: 10px;
+}
+
+.theme-dot {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border-radius: 50%;
+  background: var(--dot);
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 2px var(--dot);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.theme-dot:hover {
+  transform: scale(1.18);
+}
+
+.theme-dot.active {
+  transform: scale(1.18);
+  box-shadow: 0 0 0 3px var(--text);
+}
+
+header {
+  margin-bottom: 18px;
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-size: 11px;
+  letter-spacing: 2px;
+  font-weight: bold;
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(27px, 7vw, 42px);
+  margin: 12px 0;
+  color: var(--title);
+}
+
+.shimmer {
+  background: linear-gradient(90deg, var(--title), var(--btn), var(--accent), var(--title));
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 6s linear infinite;
+}
+
+@keyframes shimmer {
+  to { background-position: 250% 0; }
+}
+
+.sway {
+  display: inline-block;
+  animation: sway 3s ease-in-out infinite;
+  transform-origin: 50% 90%;
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(-10deg); }
+  50%      { transform: rotate(10deg); }
+}
+
+.subtitle {
+  font-size: 15px;
+  margin: 0 0 6px;
+}
+
+.hint {
+  color: var(--accent);
+  font-size: 13px;
+  margin: 0;
+}
+
+.progress {
+  width: min(86vw, 320px);
+  height: 12px;
+  margin: 16px auto 6px;
+  border-radius: 99px;
+  background: var(--card);
+  border: 2px solid var(--petal-border);
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--petal-a), var(--petal-b));
+  transition: width 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}
+
+.progress-text {
+  font-size: 12.5px;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* ---------- The flower ---------- */
+
+.flower {
+  position: relative;
+  width: min(92vw, 390px);
+  height: min(92vw, 390px);
+  margin: 22px auto 30px;
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.18s ease-out;
+}
+
+.petal {
+  position: absolute;
+  width: 39%;
+  height: 39%;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--petal-border);
+  border-radius: 48%;
+  background: linear-gradient(145deg, var(--petal-a), var(--petal-b));
+  color: var(--petal-text);
+  font-family: inherit;
+  font-size: 19px;
+  font-weight: bold;
+  line-height: 1.2;
+  box-shadow: 0 5px 12px var(--shadow);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  z-index: 1;
+  animation: bob 4s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -0.5s);
+}
+
+.petal span {
+  display: block;
+  font-size: 11px;
+  font-weight: normal;
+  margin-top: 5px;
+}
+
+.petal:hover,
+.petal:focus-visible {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow: 0 7px 18px var(--shadow-strong);
+  animation-play-state: paused;
+}
+
+.petal:focus-visible,
+.flower-center:focus-visible,
+.pill-btn:focus-visible,
+.nav-btn:focus-visible,
+.theme-dot:focus-visible,
+.close:focus-visible,
+.star:focus-visible,
+.choice:focus-visible,
+.skill:focus-visible,
+.flip-card:focus-visible,
+.dot:focus-visible,
+.envelope:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@keyframes bob {
+  0%, 100% { translate: 0 0; }
+  50%      { translate: 0 -5px; }
+}
+
+.petal.visited {
+  background: linear-gradient(145deg, var(--petal-visited-a), var(--petal-visited-b));
+}
+
+.petal.visited::after {
+  content: "✓";
+  position: absolute;
+  top: 8%;
+  right: 12%;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--center);
+  border: 2px solid var(--center-border);
+  color: var(--center-text);
+  font-size: 11px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+}
+
+.p1 { --i: 0; top: 1%;  left: 30.5%; }
+.p2 { --i: 1; top: 14%; right: 5%; }
+.p3 { --i: 2; top: 38%; right: 0; }
+.p4 { --i: 3; bottom: 4%; right: 12%; }
+.p5 { --i: 4; bottom: 0; left: 30.5%; }
+.p6 { --i: 5; bottom: 9%; left: 4%; }
+.p7 { --i: 6; top: 38%; left: 0; }
+.p8 { --i: 7; top: 13%; left: 5%; }
+
+.flower-center {
+  position: absolute;
+  width: 30%;
+  height: 30%;
+  top: 35%;
+  left: 35%;
+  z-index: 2;
+  padding: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffeab0, var(--center));
+  border: 3px solid var(--center-border);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--center-text);
+  font-family: inherit;
+  line-height: 1;
+  box-shadow: 0 4px 12px var(--shadow);
+  cursor: pointer;
+  animation: beat 2.4s ease-in-out infinite;
+}
+
+.center-photo {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* The photo (rhea.jpg). These three numbers frame the face inside the circle:
+   --zoom     bigger = closer to the face
+   --shift-x  more positive = picture moves right (you see more of its left side)
+   --shift-y  more positive = picture moves down (you see more of its top)       */
+.center-photo img {
+  --zoom: 1.4;
+  --shift-x: -4%;
+  --shift-y: 14.7%;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: translate(var(--shift-x), var(--shift-y)) scale(var(--zoom));
+}
+
+/* Shown only if rhea.jpg cannot be loaded */
+.photo-fallback {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 39px;
+  line-height: 1;
+  color: var(--center-text);
+}
+
+.photo-fallback small {
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 3px;
+}
+
+.center-badge {
+  position: absolute;
+  right: -6px;
+  bottom: -6px;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--center);
+  border: 2px solid var(--center-border);
+  color: var(--center-text);
+  font-size: 16px;
+  box-shadow: 0 2px 6px var(--shadow);
+}
+
+.flower-center:active {
+  scale: 0.94;
+}
+
+.flower-center.bloomed {
+  animation: beat 1.6s ease-in-out infinite, glow 2s ease-in-out infinite;
+}
+
+.flower-center.spin {
+  animation: center-spin 0.8s ease;
+}
+
+@keyframes beat {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.06); }
+}
+
+/* A happy wiggle instead of a full spin, so the face never turns upside down */
+@keyframes center-spin {
+  0%   { transform: rotate(0deg) scale(1); }
+  30%  { transform: rotate(-12deg) scale(1.22); }
+  60%  { transform: rotate(12deg) scale(1.22); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 0 0 var(--shadow-strong); }
+  50%      { box-shadow: 0 0 0 20px transparent; }
+}
+
+.center-quote {
+  min-height: 2.8em;
+  max-width: 340px;
+  margin: -8px auto 14px;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--title);
+}
+
+.center-quote.fade {
+  animation: rise 0.5s ease both;
+}
+
+footer {
+  font-size: 12px;
+  line-height: 1.6;
+  padding: 10px;
+  margin-top: 14px;
+  color: var(--muted);
+}
+
+/* ---------- Buttons ---------- */
+
+.pill-btn {
+  border: 2px solid var(--btn);
+  border-radius: 25px;
+  padding: 11px 24px;
+  background: var(--btn);
+  color: #fff;
+  font: inherit;
+  font-size: 15px;
+  cursor: pointer;
+  transition: transform 0.15s, background 0.2s;
+}
+
+.pill-btn:hover {
+  background: var(--btn-hover);
+  transform: translateY(-2px);
+}
+
+.pill-btn:active {
+  transform: scale(0.96);
+}
+
+.pill-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+  transform: none;
+}
+
+.pill-btn.ghost {
+  background: transparent;
+  color: var(--accent);
+}
+
+.pill-btn.ghost:hover {
+  background: var(--card);
+}
+
+/* ---------- Modal ---------- */
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--backdrop);
+  backdrop-filter: blur(4px);
+}
+
+.modal-box {
+  position: relative;
+  width: min(100%, 430px);
+  max-height: 88vh;
+  overflow-y: auto;
+  background: var(--modal-bg);
+  border: 3px solid var(--modal-border);
+  border-radius: 25px;
+  padding: 30px 22px 22px;
+  text-align: center;
+  box-shadow: 0 15px 50px rgba(40, 15, 30, 0.35);
+  animation: pop 0.25s ease-out;
+  outline: none;
+}
+
+@keyframes pop {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.close {
+  position: absolute;
+  top: 8px;
+  right: 14px;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 32px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.modal-label {
+  color: var(--accent);
+  letter-spacing: 2px;
+  font-size: 11px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.modal-box h2 {
+  color: var(--title);
+  font-size: 26px;
+  margin: 12px 0;
+}
+
+.heart-divider {
+  color: var(--btn);
+  margin: 15px 0 20px;
+}
+
+.modal-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.nav-btn {
+  flex: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid var(--btn);
+  background: transparent;
+  color: var(--accent);
+  font-size: 24px;
+  line-height: 1;
+  padding: 0 0 3px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.nav-btn:hover {
+  background: var(--card);
+  transform: scale(1.08);
+}
+
+.dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.dot {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--field-border);
+  opacity: 0.5;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s, background 0.2s;
+}
+
+.dot::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+}
+
+.dot.visited {
+  background: var(--btn);
+  opacity: 0.9;
+}
+
+.dot.current {
+  background: var(--accent);
+  opacity: 1;
+  transform: scale(1.5);
+}
+
+.modal-tip {
+  font-size: 11px;
+  color: var(--muted);
+  margin: 12px 0 0;
+}
+
+.close-bottom {
+  min-width: 140px;
+  margin-top: 14px;
+}
+
+/* ---------- Story content ---------- */
+
+#story-content {
+  font-size: 15px;
+  line-height: 1.8;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+#story-content > * {
+  animation: rise 0.5s ease both;
+}
+
+#story-content > *:nth-child(2) { animation-delay: 0.07s; }
+#story-content > *:nth-child(3) { animation-delay: 0.14s; }
+#story-content > *:nth-child(4) { animation-delay: 0.21s; }
+#story-content > *:nth-child(5) { animation-delay: 0.28s; }
+#story-content > *:nth-child(6) { animation-delay: 0.35s; }
+#story-content > *:nth-child(n+7) { animation-delay: 0.42s; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+#story-content h3 {
+  color: var(--heading);
+  text-align: center;
+  margin: 0 0 12px;
+}
+
+#story-content blockquote {
+  color: var(--accent);
+  font-style: italic;
+  margin: 14px 0;
+  padding-left: 14px;
+  border-left: 3px solid var(--btn);
+}
+
+#story-content label,
+#story-content .field-label {
+  display: block;
+  text-align: left;
+  margin: 14px 0 6px;
+  font-weight: bold;
+}
+
+#story-content textarea {
+  width: 100%;
+  padding: 11px;
+  border: 1px solid var(--field-border);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--text);
+  font: inherit;
+  resize: vertical;
+}
+
+#story-content textarea:focus {
+  outline: 3px solid var(--card);
+  border-color: var(--accent);
+}
+
+.tiny {
+  font-size: 12.5px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 8px 0;
+}
+
+.center-row {
+  text-align: center;
+  margin-top: 14px;
+}
+
+/* ---------- Flip cards ---------- */
+
+.flip-grid {
+  display: grid;
+  gap: 12px;
+  margin: 14px 0;
+}
+
+.flip-card {
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: center;
+  cursor: pointer;
+  perspective: 700px;
+}
+
+.flip-inner {
+  display: grid;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.flip-card.flipped .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-face {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  min-height: 86px;
+  padding: 14px;
+  border: 2px solid var(--petal-border);
+  border-radius: 16px;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-front {
+  background: linear-gradient(145deg, var(--petal-a), var(--petal-b));
+  color: var(--petal-text);
+}
+
+.flip-front b {
+  font-size: 16px;
+}
+
+.flip-front small {
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.flip-back {
+  background: var(--card);
+  color: var(--text);
+  transform: rotateY(180deg);
+}
+
+/* ---------- Sleepy meter ---------- */
+
+.sleepy {
+  background: var(--card);
+  border-radius: 18px;
+  padding: 14px;
+  margin-top: 14px;
+  text-align: center;
+}
+
+.meter-face {
+  font-size: 46px;
+  line-height: 1.2;
+}
+
+.meter-face.snooze {
+  animation: sway 1.6s ease-in-out infinite;
+}
+
+.meter {
+  height: 16px;
+  border-radius: 99px;
+  background: #fff;
+  border: 2px solid var(--petal-border);
+  overflow: hidden;
+  margin: 8px 0 4px;
+}
+
+.meter-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--petal-a), var(--btn));
+  transition: width 0.4s;
+}
+
+/* ---------- Skill garden ---------- */
+
+.garden {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(105px, 1fr));
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.skill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 12px 6px;
+  border: 2px solid var(--petal-border);
+  border-radius: 16px;
+  background: var(--card);
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.15s, background 0.3s;
+}
+
+.skill:hover {
+  transform: translateY(-3px);
+}
+
+.skill .plant {
+  font-size: 32px;
+  line-height: 1.2;
+  transition: transform 0.3s;
+}
+
+.skill:active .plant {
+  transform: scale(1.35);
+}
+
+.skill small {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.skill.grown {
+  background: linear-gradient(145deg, var(--petal-visited-a), var(--petal-visited-b));
+}
+
+.garden-msg {
+  text-align: center;
+  font-size: 13px;
+  color: var(--title);
+  font-weight: bold;
+  margin: 4px 0 12px;
+}
+
+/* ---------- Dice ---------- */
+
+.spin-result {
+  min-height: 74px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  margin: 14px 0 0;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--title);
+  background: var(--card);
+  border: 2px dashed var(--petal-border);
+  border-radius: 16px;
+}
+
+.spin-result.rolling {
+  animation: shake 0.18s linear infinite;
+}
+
+@keyframes shake {
+  0%, 100% { transform: rotate(-1.5deg); }
+  50%      { transform: rotate(1.5deg); }
+}
+
+/* ---------- Steps ---------- */
+
+.steps {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 6px;
+  height: 90px;
+  margin: 16px 0 6px;
+}
+
+.step {
+  width: 17%;
+  border: 2px solid var(--petal-border);
+  border-radius: 8px 8px 0 0;
+  background: var(--card);
+  transition: background 0.3s, transform 0.3s;
+}
+
+.step.lit {
+  background: linear-gradient(180deg, var(--petal-a), var(--petal-b));
+  transform: translateY(-4px);
+}
+
+/* ---------- Envelope / letter ---------- */
+
+.envelope {
+  display: block;
+  margin: 8px auto;
+  padding: 6px 18px;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 68px;
+  line-height: 1.1;
+  color: var(--accent);
+  cursor: pointer;
+  animation: wiggle 1.8s ease-in-out infinite;
+}
+
+.envelope small {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  20%      { transform: rotate(-6deg); }
+  40%      { transform: rotate(6deg); }
+  60%      { transform: rotate(-3deg); }
+  80%      { transform: rotate(3deg); }
+}
+
+.letter {
+  background: #fff;
+  border: 2px dashed var(--petal-border);
+  border-radius: 14px;
+  padding: 6px 16px;
+  outline: none;
+  animation: unfold 0.6s ease both;
+  transform-origin: top;
+}
+
+@keyframes unfold {
+  from { opacity: 0; transform: scaleY(0.4); }
+  to   { opacity: 1; transform: scaleY(1); }
+}
+
+/* ---------- Feedback form ---------- */
+
+.stars {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+
+.star {
+  padding: 0 2px;
+  border: none;
+  background: none;
+  font-size: 36px;
+  line-height: 1.2;
+  color: #e5cdd8;
+  cursor: pointer;
+  transition: transform 0.15s, color 0.15s;
+}
+
+.star.on {
+  color: #ffbf3c;
+  text-shadow: 0 2px 8px rgba(255, 191, 60, 0.5);
+}
+
+.star:hover {
+  transform: scale(1.2) rotate(-6deg);
+}
+
+.star-label {
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+  min-height: 1.4em;
+  margin: 2px 0 0;
+}
+
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.choice {
+  flex: 1 1 90px;
+  padding: 10px 6px;
+  border: 2px solid var(--field-border);
+  border-radius: 14px;
+  background: #fff;
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.15s, border-color 0.2s, background 0.2s;
+}
+
+.choice:hover {
+  transform: translateY(-2px);
+}
+
+.choice .e {
+  display: block;
+  font-size: 26px;
+  line-height: 1.3;
+}
+
+.choice.selected {
+  border-color: var(--accent);
+  background: var(--card);
+  box-shadow: 0 3px 10px var(--shadow);
+  font-weight: bold;
+}
+
+.counter {
+  text-align: right;
+  font-size: 12px;
+  color: var(--muted);
+  margin: 4px 0 0;
+}
+
+.form-error {
+  min-height: 1.4em;
+  margin: 6px 0 0;
+  text-align: center;
+  font-size: 13px;
+  color: #c0392b;
+}
+
+.thanks {
+  text-align: center;
+}
+
+.thanks .big {
+  font-size: 54px;
+  line-height: 1.2;
+  animation: beat 1.4s ease-in-out infinite;
+}
+
+.summary {
+  background: var(--card);
+  border-radius: 14px;
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.summary p {
+  margin: 6px 0;
+}
+
+/* ---------- Floating hearts, sparkles, confetti ---------- */
+
+#heart-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 20;
+}
+
+.floating-heart {
+  position: absolute;
+  font-size: 24px;
+  animation: float-up 1.8s ease-out forwards;
+}
+
+@keyframes float-up {
+  from { transform: translate(0, 0) scale(0.6); opacity: 1; }
+  to   { transform: translate(var(--dx), -170px) rotate(25deg) scale(1.1); opacity: 0; }
+}
+
+.sparkle {
+  position: absolute;
+  font-size: 14px;
+  color: var(--accent);
+  animation: sparkle 0.7s ease-out forwards;
+}
+
+@keyframes sparkle {
+  from { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  to   { transform: translate(-50%, 10px) scale(0); opacity: 0; }
+}
+
+.confetti {
+  position: absolute;
+  top: -40px;
+  animation: confetti-fall var(--dur) linear var(--delay) forwards;
+}
+
+@keyframes confetti-fall {
+  to { transform: translate(var(--dx), 112vh) rotate(540deg); }
+}
+
+/* ---------- Toast ---------- */
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 30;
+  max-width: 90vw;
+  padding: 10px 18px;
+  border-radius: 99px;
+  background: var(--text);
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  opacity: 0;
+  transform: translate(-50%, 30px);
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ---------- Small screens & accessibility ---------- */
+
+@media (max-width: 350px) {
+  .petal span { font-size: 9px; }
+  .petal { font-size: 16px; }
+  .modal-box { padding: 28px 15px 20px; }
+  .dots { gap: 7px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  #petal-rain { display: none; }
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bloom Into My World | Rhea Rocel</title>
+  <link rel="stylesheet" href="style.css?v=3">
+</head>
+<body>
+
+  <!-- Falling petals in the background (filled by script.js) -->
+  <div id="petal-rain" aria-hidden="true"></div>
+
+  <div class="page">
+
+    <div class="toolbar" role="group" aria-label="Choose a color mood">
+      <span>Pick a mood:</span>
+      <div id="theme-dots" class="theme-dots">
+        <button type="button" class="theme-dot active" data-theme="pink" style="--dot:#f77eac" aria-label="Pink theme" aria-pressed="true"></button>
+        <button type="button" class="theme-dot" data-theme="lavender" style="--dot:#a98af0" aria-label="Lavender theme" aria-pressed="false"></button>
+        <button type="button" class="theme-dot" data-theme="mint" style="--dot:#6fd3ac" aria-label="Mint theme" aria-pressed="false"></button>
+        <button type="button" class="theme-dot" data-theme="sunset" style="--dot:#fb9a62" aria-label="Sunset theme" aria-pressed="false"></button>
+      </div>
+    </div>
+
+    <header>
+      <p class="eyebrow">A LITTLE WEBSITE MADE WITH LOVE ♡</p>
+      <h1><span class="shimmer">Bloom Into My World</span> <span class="sway">🌸</span></h1>
+      <p class="subtitle">Eight petals, eight little pieces of me.</p>
+      <p class="hint">Tap a petal to discover my story!</p>
+
+      <div class="progress" id="progress" role="progressbar" aria-label="Petals discovered" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+      <p class="progress-text" id="progress-text">0 of 8 petals discovered</p>
+    </header>
+
+    <main id="stage">
+      <div class="flower" id="flower">
+        <button class="petal p1" data-story="0" aria-label="Petal 1: About Me">01<span>About Me</span></button>
+        <button class="petal p2" data-story="1" aria-label="Petal 2: Favorites">02<span>Favorites</span></button>
+        <button class="petal p3" data-story="2" aria-label="Petal 3: Interests">03<span>Interests</span></button>
+        <button class="petal p4" data-story="3" aria-label="Petal 4: Skills and Goals">04<span>Skills &amp; Goals</span></button>
+        <button class="petal p5" data-story="4" aria-label="Petal 5: Fun Side">05<span>Fun Side</span></button>
+        <button class="petal p6" data-story="5" aria-label="Petal 6: Growth">06<span>Growth</span></button>
+        <button class="petal p7" data-story="6" aria-label="Petal 7: Thank You, Sir">07<span>Thank You, Sir</span></button>
+        <button class="petal p8" data-story="7" aria-label="Petal 8: Feedback">08<span>Feedback</span></button>
+
+        <button class="flower-center" id="flower-center" type="button" aria-label="Rhea, tap for a little message">
+          <span class="center-photo">
+            <img src="rhea.jpg" alt="Photo of Rhea Rocel" id="rheaPhoto"
+              onerror="this.style.display='none'; document.getElementById('photoFallback').style.display='flex';">
+            <span class="photo-fallback" id="photoFallback">🌸<small>Rhea</small></span>
+          </span>
+          <span class="center-badge" id="center-icon">♡</span>
+        </button>
+      </div>
+
+      <p class="center-quote" id="center-quote" aria-live="polite">Psst… tap my photo in the middle 💗</p>
+
+      <button type="button" class="pill-btn" id="surprise">🎲 Surprise me</button>
+    </main>
+
+    <footer>Made by Rhea Rocel with a little creativity and lots of heart ♡</footer>
+  </div>
+
+  <div class="modal" id="story-modal" aria-hidden="true">
+    <div class="backdrop" id="backdrop"></div>
+    <section class="modal-box" id="modal-box" role="dialog" aria-modal="true" aria-labelledby="story-title" tabindex="-1">
+      <button class="close" id="close-modal" aria-label="Close">×</button>
+      <p class="modal-label" id="story-number">PETAL 01 / 08</p>
+      <h2 id="story-title">About Me</h2>
+      <div class="heart-divider">♡　✿　♡</div>
+
+      <div id="story-content"></div>
+
+      <div class="modal-nav">
+        <button type="button" class="nav-btn" id="prev-btn" aria-label="Previous petal">‹</button>
+        <div class="dots" id="dots"></div>
+        <button type="button" class="nav-btn" id="next-btn" aria-label="Next petal">›</button>
+      </div>
+      <p class="modal-tip">Tip: swipe, or use the ← → keys, to hop between petals</p>
+
+      <button class="pill-btn close-bottom" id="close-bottom">Close ♡</button>
+    </section>
+  </div>
+
+  <div id="heart-layer" aria-hidden="true"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js?v=3"></script>
+</body>
+</html>
